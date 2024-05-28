@@ -1,0 +1,71 @@
+{
+  "format": "custom",
+  "id": "wohnung",
+  "label": "wohnung",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "wohnung": {
+        "type": "Group",
+        "config": {
+          "label": "Wohnung",
+          "repeat": true,
+          "fields": {
+            "apt_id": {
+              "type": "Text",
+              "config": {
+                "label": "id",
+                "placeholder": ""
+              }
+            },
+            "number": {
+              "type": "Text",
+              "config": {
+                "label": "Wohnungsnummer",
+                "placeholder": ""
+              }
+            },
+            "rooms": {
+              "type": "Text",
+              "config": {
+                "label": "Zimmer",
+                "placeholder": ""
+              }
+            },
+            "status": {
+              "type": "Select",
+              "config": {
+                "label": "Status",
+                "placeholder": "",
+                "options": ["frei", "reserviert", "verkauft"]
+              }
+            },
+            "space": {
+              "type": "Text",
+              "config": {
+                "label": "Fläche",
+                "placeholder": ""
+              }
+            },
+            "floor": {
+              "type": "Select",
+              "config": {
+                "label": "Geschoss",
+                "placeholder": "",
+                "options": ["Erdgeschoss", "Obergeschoss", "Attikagechoss"]
+              }
+            },
+            "price": {
+              "type": "Text",
+              "config": {
+                "label": "Preis",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
