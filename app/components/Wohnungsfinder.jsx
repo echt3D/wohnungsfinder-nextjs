@@ -1,9 +1,9 @@
 "use client";
-
-import { useState } from "react";
+import { useContext } from "react";
+import { AptContext } from "../utils/createContext";
 
 const Wohnungsfinder = () => {
-  const [hoveredApt, setHoveredApt] = useState("");
+  const { hoveredApt, setHoveredApt } = useContext(AptContext);
   const isHovered = (i) => hoveredApt === i;
 
   const svgArr = [
@@ -19,7 +19,7 @@ const Wohnungsfinder = () => {
     <div
       style={{
         backgroundImage: `url('/images/1005.jpg')`,
-        width: "90vw",
+        width: "80vw",
         height: "100vh",
       }}
     >

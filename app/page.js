@@ -1,20 +1,19 @@
 import { createClient } from "@/prismicio";
 import Wohnungsfinder from "./components/Wohnungsfinder";
+import AptProvider from "./components/AptProvider";
+import Sidebar from "./components/Sidebar";
 
 const Home = async () => {
   const client = createClient();
-
-  try {
-    const apartments = await client.getSingle("wohnung");
-    console.log(apartments);
-  } catch (error) {
-    console.error("what's wrong?: ", error);
-  }
+  const apartments = await client.getSingle("wohnung");
 
   return (
-    <main className="">
-      <Wohnungsfinder />
-    </main>
+    <AptProvider>
+      <main className="flex">
+        <Wohnungsfinder />
+        <Sidebar apartments={apartments.data.wohnung} />
+      </main>
+    </AptProvider>
   );
 };
 
