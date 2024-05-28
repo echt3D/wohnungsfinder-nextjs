@@ -2,9 +2,9 @@
 import { useContext } from "react";
 import { AptContext } from "../utils/createContext";
 
-const Wohnungsfinder = () => {
+const Wohnungsfinder = ({ apartments }) => {
   const { hoveredApt, setHoveredApt } = useContext(AptContext);
-  const isHovered = (i) => hoveredApt === i;
+  console.log("hoveredApt", hoveredApt.status);
 
   const svgArr = [
     "m1143.27,473.03l-5.54,43.06-89.22-.7-153.23-1.22h0l10.98-15.7-3.27-75.06,30.7-37.29,170.58.19.16,11.48,38.45.05.38,75.19Z",
@@ -15,6 +15,7 @@ const Wohnungsfinder = () => {
     "m1506.36,695.12h0l-273.89-1.75-2.4-31.77-5.91-78.33.58-55.65,6.08,70.45,2.08,23.98,256.08.49-2.35,35.18,19.74,37.4Z",
     "M1583.1,735.4l-79.7-0.9v0.2l3-39.6l-273.9-1.8l-3.6-48.2l-0.7,60.3l3.3,49.7l-210.4-0.2l-6.7,31.9l219.2,1.1l378.2,0.9l0.4-4.7L1583.1,735.4L1583.1,735.4z",
   ];
+
   return (
     <div
       style={{
@@ -28,9 +29,9 @@ const Wohnungsfinder = () => {
           <path
             key={i}
             d={`${svg}`}
-            className={`transition-all duration-500 ${isHovered(i) ? "fill-lime-500 opacity-70" : "fill-transparent"}`}
+            className={`transition-all duration-500 fill-transparent hover:fill-${hoveredApt.status} opacity-70 cursor-pointer `}
             name={`wohnung-${i}`}
-            onMouseEnter={() => setHoveredApt(i)}
+            onMouseEnter={() => setHoveredApt(apartments[i])}
           />
         ))}
       </svg>

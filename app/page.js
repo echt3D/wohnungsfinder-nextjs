@@ -10,7 +10,7 @@ const Home = async () => {
   return (
     <AptProvider>
       <main className="flex">
-        <Wohnungsfinder />
+        <Wohnungsfinder apartments={apartments.data.wohnung} />
         <Sidebar apartments={apartments.data.wohnung} />
       </main>
     </AptProvider>
