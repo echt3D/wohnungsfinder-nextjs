@@ -12,6 +12,7 @@ const Home = async () => {
       <main className="flex">
         <Wohnungsfinder apartments={apartments.data.wohnung} />
         <Sidebar apartments={apartments.data.wohnung} />
+        
       </main>
     </AptProvider>
   );

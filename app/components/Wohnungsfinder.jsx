@@ -1,10 +1,11 @@
 "use client";
 import { useContext } from "react";
 import { AptContext } from "../utils/createContext";
+import MouseCard from "./MouseCard";
 
 const Wohnungsfinder = ({ apartments }) => {
   const { hoveredApt, setHoveredApt } = useContext(AptContext);
-  console.log("hoveredApt", hoveredApt.status);
+  console.log("hoveredApt", hoveredApt);
 
   const svgArr = [
     "m1143.27,473.03l-5.54,43.06-89.22-.7-153.23-1.22h0l10.98-15.7-3.27-75.06,30.7-37.29,170.58.19.16,11.48,38.45.05.38,75.19Z",
@@ -24,14 +25,16 @@ const Wohnungsfinder = ({ apartments }) => {
         height: "100vh",
       }}
     >
+      {hoveredApt && <MouseCard />}
       <svg width="100vw" height="100vh">
         {svgArr.map((svg, i) => (
           <path
             key={i}
             d={`${svg}`}
-            className={`transition-all duration-500 fill-transparent hover:fill-${hoveredApt.status} opacity-70 cursor-pointer `}
+            className={`transition-all duration-500 fill-transparent hover:fill-${hoveredApt.status} opacity-70 cursor-pointer border-2 border-red-500`}
             name={`wohnung-${i}`}
             onMouseEnter={() => setHoveredApt(apartments[i])}
+            onMouseLeave={() => setHoveredApt("")}
           />
         ))}
       </svg>
