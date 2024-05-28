@@ -25,18 +25,21 @@ const Wohnungsfinder = ({ apartments }) => {
         height: "100vh",
       }}
     >
-      {hoveredApt && <MouseCard />}
-      <svg width="100vw" height="100vh">
-        {svgArr.map((svg, i) => (
-          <path
-            key={i}
-            d={`${svg}`}
-            className={`transition-all duration-500 fill-transparent hover:fill-${hoveredApt.status} opacity-70 cursor-pointer border-2 border-red-500`}
-            name={`wohnung-${i}`}
-            onMouseEnter={() => setHoveredApt(apartments[i])}
-            onMouseLeave={() => setHoveredApt("")}
-          />
-        ))}
+      {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
+      <svg width="100vw" height="100vh" className="border-2 border-red-500">
+        <g width="10vw" height="10vh" className="border-2 border-blue-500">
+          {svgArr.map((svg, i) => (
+            <path
+              style={{ stroke: "green", "stroke-width": 3 }}
+              key={i}
+              d={`${svg}`}
+              className={`transition-all duration-200 fill-transparent hover:fill-${hoveredApt && hoveredApt.status} opacity-70 cursor-pointer `}
+              name={`wohnung-${i}`}
+              onMouseEnter={() => setHoveredApt(apartments[i])}
+              onMouseLeave={() => setHoveredApt(null)}
+            />
+          ))}
+        </g>
       </svg>
     </div>
   );

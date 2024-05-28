@@ -3,8 +3,8 @@ import { useState } from "react";
 import { AptContext } from "../utils/createContext";
 
 const AptProvider = ({ children }) => {
-  const [hoveredApt, setHoveredApt] = useState({});
-  const [clickedApt, setClickedApt] = useState({});
+  const [hoveredApt, setHoveredApt] = useState(null);
+  const [clickedApt, setClickedApt] = useState(null);
 
   const value = {
     hoveredApt,
