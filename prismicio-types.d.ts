@@ -66,7 +66,9 @@ export interface WohnungDocumentDataWohnungItem {
    * - **API ID Path**: wohnung.wohnung[].floor
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  floor: prismic.SelectField<"Erdgeschoss" | "Obergeschoss" | "Attikagechoss">;
+  floor: prismic.SelectField<
+    "Erdgeschoss" | "Obergeschoss" | "Attikagechoss" | "Gartengeschoss"
+  >;
 
   /**
    * Preis field in *wohnung → Wohnung*

@@ -53,7 +53,12 @@
               "config": {
                 "label": "Geschoss",
                 "placeholder": "",
-                "options": ["Erdgeschoss", "Obergeschoss", "Attikagechoss"]
+                "options": [
+                  "Erdgeschoss",
+                  "Obergeschoss",
+                  "Attikagechoss",
+                  "Gartengeschoss"
+                ]
               }
             },
             "price": {
