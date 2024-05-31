@@ -1,11 +1,37 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 import MouseCard from "./MouseCard";
+import Image from "next/image";
 
 const Wohnungsfinder = ({ apartments }) => {
+  const canvasRef = useRef(null);
   const { hoveredApt, setHoveredApt } = useContext(AptContext);
-  console.log("hoveredApt", hoveredApt);
+  const bounds = { width: 2400, height: 1350 };
+
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas.getContext("2d");
+
+  //   const bounds = { width: 2400, height: 1350 };
+  //   const scale = Math.max(
+  //     canvas.width / bounds.width,
+  //     canvas.height / bounds.height
+  //   );
+  //   const scaledWidth = bounds.width * scale;
+  //   const scaledHeight = bounds.height * scale;
+  //   const centerX = canvas.width / 2;
+  //   const centerY = canvas.height / 2;
+  //   const pathX = centerX - scaledWidth / 2;
+  //   const pathY = centerY - scaledHeight / 2;
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   ctx.save();
+  //   ctx.translate(pathX, pathY);
+  //   ctx.scale(scale, scale);
+
+  //   ctx.translate(pathX, pathY);
+  //   ctx.scale(scale, scale);
+  // }, []);
 
   const svgArr = [
     "m1143.27,473.03l-5.54,43.06-89.22-.7-153.23-1.22h0l10.98-15.7-3.27-75.06,30.7-37.29,170.58.19.16,11.48,38.45.05.38,75.19Z",
@@ -18,29 +44,32 @@ const Wohnungsfinder = ({ apartments }) => {
   ];
 
   return (
-    <div
-      style={{
-        backgroundImage: `url('/images/1005.jpg')`,
-        width: "80vw",
-        height: "100vh",
-      }}
-    >
-      {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
-      <svg width="100vw" height="100vh" className="border-2 border-red-500">
-        <g width="10vw" height="10vh" className="border-2 border-blue-500">
+    <div>
+      <div
+        style={{
+          backgroundImage: `url('/images/1005.jpg')`,
+        }}
+        className=" w-[80vw] h-[100vh]"
+      >
+        {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
+        {/* <div className="w-[80vw] h-[100vh] ">
+        <Image src="/images/1005.jpg" fill alt="hi" />
+      </div> */}
+        <svg width="100%" height="100%" className={`border-2 border-red-500 `}>
           {svgArr.map((svg, i) => (
             <path
-              style={{ stroke: "green", "stroke-width": 3 }}
               key={i}
               d={`${svg}`}
+              stroke={"red"}
+              strokeWidth={"5px"}
               className={`transition-all duration-200 fill-transparent hover:fill-${hoveredApt && hoveredApt.status} opacity-70 cursor-pointer `}
               name={`wohnung-${i}`}
               onMouseEnter={() => setHoveredApt(apartments[i])}
               onMouseLeave={() => setHoveredApt(null)}
             />
           ))}
-        </g>
-      </svg>
+        </svg>
+      </div>
     </div>
   );
 };

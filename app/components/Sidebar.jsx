@@ -1,6 +1,6 @@
 const Sidebar = ({ apartments }) => {
   return (
-    <aside className="w-full h-screen  overflow-y-scroll">
+    <aside className="w-20vw h-screen  overflow-y-scroll">
       <ul className="">
         {apartments.map((apartment, i) => (
           <li key={i} className="w-full border border-black p-2">

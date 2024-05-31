@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  safelist: ["hover:fill-frei", "hover:fill-reserviert", "hover:fill-verkauft"],
+  safelist: [
+    "bg-frei",
+    "bg-reserviert",
+    "bg-verkauft",
+    "hover:fill-frei",
+    "hover:fill-reserviert",
+    "hover:fill-verkauft",
+  ],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,12 +16,12 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        "10vw": "10vw",
+        "20vw": "20vw",
       },
       colors: {
         frei: "#7CB342",
         reserviert: "#FFA000",
-        verkauft: "#BF360C",
+        verkauft: "#535353",
       },
     },
   },
