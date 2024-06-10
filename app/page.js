@@ -1,6 +1,7 @@
 import { createClient } from "@/prismicio";
 import Wohnungsfinder from "./components/Wohnungsfinder";
 import AptProvider from "./components/AptProvider";
+import Navigations from "./components/Navigations";
 import Sidebar from "./components/Sidebar";
 
 const Home = async () => {
@@ -10,9 +11,11 @@ const Home = async () => {
   return (
     <AptProvider>
       <main className="flex">
-        <Wohnungsfinder apartments={apartments.data.wohnung} />
+        <section className="w-[80vw] h-[100vh] relative">
+          <Wohnungsfinder apartments={apartments.data.wohnung} />
+          <Navigations />
+        </section>
         <Sidebar apartments={apartments.data.wohnung} />
-        
       </main>
     </AptProvider>
   );

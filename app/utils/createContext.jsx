@@ -6,4 +6,6 @@ export const AptContext = createContext({
   clickedApt: {},
   setClickedApt: () => {},
   isHovered: () => {},
+  bgImage: "",
+  setBgImage: () => {},
 });

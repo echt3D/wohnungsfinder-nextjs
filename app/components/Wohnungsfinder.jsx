@@ -5,7 +5,8 @@ import MouseCard from "./MouseCard";
 
 const Wohnungsfinder = ({ apartments }) => {
   const canvasRef = useRef(null);
-  const { hoveredApt, setHoveredApt } = useContext(AptContext);
+  const { hoveredApt, setHoveredApt, bgImage, setBgImage } =
+    useContext(AptContext);
 
   const svgArr = [
     "m1143.27,473.03l-5.54,43.06-89.22-.7-153.23-1.22h0l10.98-15.7-3.27-75.06,30.7-37.29,170.58.19.16,11.48,38.45.05.38,75.19Z",
@@ -38,9 +39,9 @@ const Wohnungsfinder = ({ apartments }) => {
   return (
     <div
       style={{
-        backgroundImage: `url('/images/1005.jpg')`,
+        backgroundImage: `url('/images/${bgImage}.jpg')`,
       }}
-      className=" w-[100vw] h-[100vh]"
+      className="w-full h-full"
     >
       {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
       {/* <div className="w-[80vw] h-[100vh] ">
