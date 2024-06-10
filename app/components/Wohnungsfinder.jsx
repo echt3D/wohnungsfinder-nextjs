@@ -2,36 +2,10 @@
 import { useContext, useRef, useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 import MouseCard from "./MouseCard";
-import Image from "next/image";
 
 const Wohnungsfinder = ({ apartments }) => {
   const canvasRef = useRef(null);
   const { hoveredApt, setHoveredApt } = useContext(AptContext);
-  const bounds = { width: 2400, height: 1350 };
-
-  // useEffect(() => {
-  //   const canvas = canvasRef.current;
-  //   const ctx = canvas.getContext("2d");
-
-  //   const bounds = { width: 2400, height: 1350 };
-  //   const scale = Math.max(
-  //     canvas.width / bounds.width,
-  //     canvas.height / bounds.height
-  //   );
-  //   const scaledWidth = bounds.width * scale;
-  //   const scaledHeight = bounds.height * scale;
-  //   const centerX = canvas.width / 2;
-  //   const centerY = canvas.height / 2;
-  //   const pathX = centerX - scaledWidth / 2;
-  //   const pathY = centerY - scaledHeight / 2;
-  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //   ctx.save();
-  //   ctx.translate(pathX, pathY);
-  //   ctx.scale(scale, scale);
-
-  //   ctx.translate(pathX, pathY);
-  //   ctx.scale(scale, scale);
-  // }, []);
 
   const svgArr = [
     "m1143.27,473.03l-5.54,43.06-89.22-.7-153.23-1.22h0l10.98-15.7-3.27-75.06,30.7-37.29,170.58.19.16,11.48,38.45.05.38,75.19Z",
@@ -43,33 +17,52 @@ const Wohnungsfinder = ({ apartments }) => {
     "M1583.1,735.4l-79.7-0.9v0.2l3-39.6l-273.9-1.8l-3.6-48.2l-0.7,60.3l3.3,49.7l-210.4-0.2l-6.7,31.9l219.2,1.1l378.2,0.9l0.4-4.7L1583.1,735.4L1583.1,735.4z",
   ];
 
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   if (canvas) {
+  //     const ctx = canvas.getContext("2d");
+  //     console.log("ctx", ctx);
+  //     if (ctx) {
+  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //       ctx.strokeStyle = "red";
+  //       ctx.lineWidth = 2;
+  //       svgArr.forEach((val) => {
+  //         const path = new Path2D(val);
+  //         console.log(ctx.stroke(path));
+  //         ctx.stroke(path);
+  //       });
+  //     }
+  //   }
+  // }, []);
+
   return (
-    <div>
-      <div
-        style={{
-          backgroundImage: `url('/images/1005.jpg')`,
-        }}
-        className=" w-[80vw] h-[100vh]"
-      >
-        {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
-        {/* <div className="w-[80vw] h-[100vh] ">
+    <div
+      style={{
+        backgroundImage: `url('/images/1005.jpg')`,
+      }}
+      className=" w-[100vw] h-[100vh]"
+    >
+      {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
+      {/* <div className="w-[80vw] h-[100vh] ">
         <Image src="/images/1005.jpg" fill alt="hi" />
       </div> */}
-        <svg width="100%" height="100%" className={`border-2 border-red-500 `}>
-          {svgArr.map((svg, i) => (
-            <path
-              key={i}
-              d={`${svg}`}
-              stroke={"red"}
-              strokeWidth={"5px"}
-              className={`transition-all duration-200 fill-transparent hover:fill-${hoveredApt && hoveredApt.status} opacity-70 cursor-pointer `}
-              name={`wohnung-${i}`}
-              onMouseEnter={() => setHoveredApt(apartments[i])}
-              onMouseLeave={() => setHoveredApt(null)}
-            />
-          ))}
-        </svg>
-      </div>
+      <svg width="100%" height="100%">
+        {svgArr.map((svg, i) => (
+          <path
+            key={i}
+            d={`${svg}`}
+            className={`transition-all duration-200 fill-transparent hover:fill-${hoveredApt && hoveredApt.status} opacity-70 cursor-pointer `}
+            name={`wohnung-${i}`}
+            onMouseEnter={() => setHoveredApt(apartments[i])}
+            onMouseLeave={() => setHoveredApt(null)}
+          />
+        ))}
+      </svg>
+      {/* <canvas
+        id="hi"
+        ref={canvasRef}
+        className=" w-full h-full border-2 border-red-500"
+      ></canvas> */}
     </div>
   );
 };

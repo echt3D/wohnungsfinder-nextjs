@@ -24,7 +24,7 @@ const MouseCard = ({ hoveredApt }) => {
   return (
     <div
       ref={cursorRef}
-      className="bg-white rounded-bl-xl rounded-r-xl px-4 py-2 fixed z-999"
+      className="bg-white rounded-bl-2xl rounded-r-2xl px-4 py-2 fixed z-999"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
