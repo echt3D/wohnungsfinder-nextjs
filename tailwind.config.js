@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   safelist: [
+    "text-frei",
+    "text-reserviert",
+    "text-verkauft",
     "bg-frei",
     "bg-reserviert",
     "bg-verkauft",
+    "fill-frei",
+    "fill-reserviert",
+    "fill-verkauft",
     "hover:fill-frei",
     "hover:fill-reserviert",
     "hover:fill-verkauft",

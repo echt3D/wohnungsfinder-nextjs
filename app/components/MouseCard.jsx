@@ -27,11 +27,15 @@ const MouseCard = ({ hoveredApt }) => {
       className="bg-white rounded-bl-2xl rounded-r-2xl px-4 py-2 fixed z-999"
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className={`w-6 h-6 bg-${hoveredApt.status} rounded-full`}></div>
-          <div className="text-sm">{`Whg. Nr. ${hoveredApt.number}`}</div>
+        <div
+          className={`px-2 flex items-center gap-2 bg-${hoveredApt.status} rounded-2xl bg-opacity-30`}
+        >
+          <div className={`w-2 h-2 bg-${hoveredApt.status} rounded-full`}></div>
+          <p className={`text-sm text-${hoveredApt.status}`}>
+            {hoveredApt.status}
+          </p>
         </div>
-        <Image src="/images/like.svg" width={32} height={32} alt="like" />
+        <div className="text-sm">{`Whg. Nr. ${hoveredApt.number}`}</div>
       </div>
       <div>
         <div className="text-lg">{`${hoveredApt.rooms}-Zimmer Wohnung`}</div>
