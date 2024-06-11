@@ -7,17 +7,18 @@ const AptProvider = ({ children }) => {
   const [clickedApt, setClickedApt] = useState(null);
   const [bgImage, setBgImage] = useState(1005);
   const [likedApts, setLikedApts] = useState([]);
+
   const handleLikedApts = (apartment) => {
     if (likedApts.includes(apartment)) {
       const removedLikedApts = likedApts.filter(
         (likedApt) => likedApt !== apartment
       );
       setLikedApts(removedLikedApts);
-      localStorage.setItem("likedApts", removedLikedApts);
+      localStorage.setItem("likedApts", JSON.stringify(removedLikedApts));
     } else {
       likedApts.push(apartment);
       setLikedApts(likedApts);
-      localStorage.setItem("likedApts", likedApts);
+      localStorage.setItem("likedApts", JSON.stringify(likedApts));
     }
   };
 
@@ -25,7 +26,9 @@ const AptProvider = ({ children }) => {
 
   useEffect(() => {
     const storedLikedApts = localStorage.getItem("likedApts");
-    if (storedLikedApts) setLikedApts(storedLikedApts);
+    console.log("storedLikedApts", !!storedLikedApts);
+    if (storedLikedApts) setLikedApts(JSON.parse(storedLikedApts));
+    console.log("storedLikedApts", typeof storedLikedApts);
   }, []);
 
   const value = {
