@@ -8,4 +8,8 @@ export const AptContext = createContext({
   isHovered: () => {},
   bgImage: "",
   setBgImage: () => {},
+  likedApts: [],
+  setLikedApts: () => {},
+  handleLikedApts: () => {},
+  isLikedApt: () => {},
 });
