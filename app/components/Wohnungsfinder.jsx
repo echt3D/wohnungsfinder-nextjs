@@ -8,6 +8,8 @@ const Wohnungsfinder = ({ apartments }) => {
   const { hoveredApt, setHoveredApt, bgImage, setBgImage } =
     useContext(AptContext);
 
+  const handleHover = (apartment) =>
+    setHoveredApt({ ...apartment, hoveredInMain: true });
   return (
     <div
       style={{
@@ -15,7 +17,9 @@ const Wohnungsfinder = ({ apartments }) => {
       }}
       className="w-full h-full bg-center "
     >
-      {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
+      {hoveredApt && hoveredApt.hoveredInMain && (
+        <MouseCard hoveredApt={hoveredApt} />
+      )}
 
       <svg className="w-full h-full border-2 border-red-500">
         {svgData[bgImage].map((svg, i) => (
@@ -24,7 +28,7 @@ const Wohnungsfinder = ({ apartments }) => {
             d={`${svg}`}
             className={`transition-all duration-200 hover:fill-${hoveredApt && hoveredApt.status} opacity-70 cursor-pointer ${hoveredApt && hoveredApt.apt_id === apartments[i].apt_id ? `fill-${hoveredApt.status}` : "fill-transparent"}`}
             name={`wohnung-${i}`}
-            onMouseEnter={() => setHoveredApt(apartments[i])}
+            onMouseEnter={() => handleHover(apartments[i])}
             onMouseLeave={() => setHoveredApt(null)}
           />
         ))}
