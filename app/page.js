@@ -8,6 +8,8 @@ const Home = async () => {
   const client = createClient();
   const apartments = await client.getSingle("wohnung");
 
+  console.log(apartments.data.wohnung);
+
   return (
     <AptProvider>
       <main className="flex">

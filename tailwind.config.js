@@ -29,6 +29,9 @@ module.exports = {
         reserviert: "#FFA000",
         verkauft: "#535353",
       },
+      boxShadow: {
+        custom: "inset 12px -100px 23px -12px rgba(233, 233, 233, 1);",
+      },
     },
   },
   plugins: [],
