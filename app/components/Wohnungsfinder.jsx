@@ -13,11 +13,11 @@ const Wohnungsfinder = ({ apartments }) => {
       style={{
         backgroundImage: `url('/images/${bgImage}.jpg')`,
       }}
-      className="w-full h-full"
+      className="w-full h-full bg-center "
     >
-      {/* {hoveredApt && <MouseCard hoveredApt={hoveredApt} />} */}
+      {hoveredApt && <MouseCard hoveredApt={hoveredApt} />}
 
-      <svg className="w-full h-full">
+      <svg className="w-full h-full border-2 border-red-500">
         {svgData[bgImage].map((svg, i) => (
           <path
             key={i}

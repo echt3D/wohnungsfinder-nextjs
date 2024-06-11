@@ -11,7 +11,7 @@ const Home = async () => {
   return (
     <AptProvider>
       <main className="flex">
-        <section className="w-[80vw] h-[100vh] relative">
+        <section className="w-screen h-[90vh] xl:w-[80vw] xl:h-screen relative">
           <Wohnungsfinder apartments={apartments.data.wohnung} />
           <Navigations />
         </section>

@@ -48,7 +48,9 @@ const SidebarCard = ({ apartment }) => {
           <div className="text-lg">{`${apartment.rooms}-Zimmer Wohnung`}</div>
         </div>
         {openDetails ? (
-          <div>
+          <div
+            className={`${openDetails ? "max-h-60" : "max-h-0"} transition-[height] duration-700 ease-in-out`}
+          >
             <div>
               <p className="text-sm">Geschoss</p>
               <p>{apartment.floor}</p>
@@ -84,7 +86,7 @@ const SidebarCard = ({ apartment }) => {
         )}
       </section>
       {openDetails && (
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4 ">
           <div className="flex gap-4">
             <button className="w-1/2 border border-black rounded-2xl text-center hover:bg-verkauft hover:bg-opacity-50 transition-all duration-200">
               Grundrisse
