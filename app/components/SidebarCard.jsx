@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 const SidebarCard = ({ apartment }) => {
@@ -9,13 +8,13 @@ const SidebarCard = ({ apartment }) => {
 
   const formatFloorName = (floor) => {
     switch (floor) {
-      case "Gartengeschoss":
+      case "0-Gartengeschoss":
         return "GG";
-      case "Erdgeschoss":
+      case "1-Erdgeschoss":
         return "EG";
-      case "Obergeschoss":
+      case "2-Obergeschoss":
         return "OG";
-      case "Attikagechoss":
+      case "3-Attikagechoss":
         return "AG";
       default:
         "--";

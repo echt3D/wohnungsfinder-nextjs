@@ -7,6 +7,7 @@ const AptProvider = ({ children }) => {
   const [clickedApt, setClickedApt] = useState(null);
   const [bgImage, setBgImage] = useState(1005);
   const [likedApts, setLikedApts] = useState([]);
+  const [sort, setSort] = useState({ method: "", direction: "descendent" });
 
   const handleLikedApts = (apartment) => {
     if (likedApts.includes(apartment)) {
@@ -55,7 +56,7 @@ const AptProvider = ({ children }) => {
     return newArr;
   };
 
-  const handleSort = (apartments, method, direction) => {
+  const sortApts = (apartments, method, direction) => {
     const apartmentsCopy = changeFloorValue([...apartments]);
 
     switch (direction) {
@@ -64,14 +65,23 @@ const AptProvider = ({ children }) => {
           (apartmentA, apartmentB) =>
             Number(apartmentA[method]) - Number(apartmentB[method])
         );
+        console.log("descendent here");
+        break;
       case "ascendent":
         apartmentsCopy.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentB[method]) - Number(apartmentA[method])
         );
-      default:
-        return apartmentsCopy;
+        console.log("ascendent here");
+        break;
     }
+    console.log("apartmentsCopy", apartmentsCopy);
+    return apartmentsCopy;
+  };
+
+  const handleSort = (e) => {
+    const { name, value } = e.target;
+    setSort({ ...sort, [name]: value });
   };
 
   const value = {
@@ -85,7 +95,10 @@ const AptProvider = ({ children }) => {
     setLikedApts,
     handleLikedApts,
     isLikedApt,
+    sortApts,
     handleSort,
+    sort,
+    setSort,
   };
 
   return <AptContext.Provider value={value}>{children}</AptContext.Provider>;

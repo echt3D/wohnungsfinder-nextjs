@@ -3,10 +3,12 @@ import SidebarCard from "./SidebarCard";
 import FilterButton from "./FilterButton";
 import Filter from "./Filter";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AptContext } from "../utils/createContext";
 
 const Sidebar = ({ apartments }) => {
   const [openFilter, setOpenFilter] = useState(false);
+  const { sortApts, sort } = useContext(AptContext);
   return (
     <aside className="hidden xl:flex w-20vw  flex-col items-center  p-4  gap-4 relative">
       <div>
@@ -19,14 +21,23 @@ const Sidebar = ({ apartments }) => {
       </div>
       <div className="h-[83vh] overflow-y-scroll w-full">
         <ul className="w-full flex flex-col gap-2">
-          {apartments.map((apartment, i) => (
-            <li key={i} className="w-full border border-black p-2 rounded-2xl">
-              <SidebarCard apartment={apartment} />
-            </li>
-          ))}
+          {sortApts(apartments, sort.method, sort.direction).map(
+            (apartment, i) => (
+              <li
+                key={i}
+                className="w-full border border-black p-2 rounded-2xl"
+              >
+                <SidebarCard apartment={apartment} />
+              </li>
+            )
+          )}
         </ul>
       </div>
-      {openFilter ? <Filter /> : <FilterButton setOpenFilter={setOpenFilter} />}
+      {openFilter ? (
+        <Filter setOpenFilter={setOpenFilter} />
+      ) : (
+        <FilterButton setOpenFilter={setOpenFilter} />
+      )}
     </aside>
   );
 };

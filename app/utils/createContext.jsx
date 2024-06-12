@@ -12,5 +12,8 @@ export const AptContext = createContext({
   setLikedApts: () => {},
   handleLikedApts: () => {},
   isLikedApt: () => {},
+  sortApts: () => {},
   handleSort: () => {},
+  sort: {},
+  setSort: () => {},
 });
