@@ -8,13 +8,13 @@ const SidebarCard = ({ apartment }) => {
 
   const formatFloorName = (floor) => {
     switch (floor) {
-      case "0-Gartengeschoss":
+      case "Gartengeschoss":
         return "GG";
-      case "1-Erdgeschoss":
+      case "Erdgeschoss":
         return "EG";
-      case "2-Obergeschoss":
+      case "Obergeschoss":
         return "OG";
-      case "3-Attikagechoss":
+      case "Attikagechoss":
         return "AG";
       default:
         "--";

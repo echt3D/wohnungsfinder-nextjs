@@ -18,6 +18,7 @@ const Home = async () => {
       status: "reserviert",
       space: "115.2",
       floor: "Erdgeschoss",
+      floor_num: 1,
       price: "1’851’000",
     },
     {
@@ -27,6 +28,7 @@ const Home = async () => {
       status: "frei",
       space: "131.6",
       floor: "Gartengeschoss",
+      floor_num: 0,
       price: "1’801’000",
     },
     {
@@ -36,6 +38,7 @@ const Home = async () => {
       status: "frei",
       space: "114.8",
       floor: "Erdgeschoss",
+      floor_num: 1,
       price: "1’811’000",
     },
     {
@@ -45,6 +48,7 @@ const Home = async () => {
       status: "frei",
       space: "115.2",
       floor: "Obergeschoss",
+      floor_num: 2,
       price: "1’921’000",
     },
     {
@@ -54,6 +58,7 @@ const Home = async () => {
       status: "frei",
       space: "85.9",
       floor: "Attikagechoss",
+      floor_num: 3,
       price: "1’635’000",
     },
     {
@@ -63,6 +68,7 @@ const Home = async () => {
       status: "verkauft",
       space: "114.8",
       floor: "Obergeschoss",
+      floor_num: 2,
       price: "1’881’000",
     },
     {
@@ -72,6 +78,7 @@ const Home = async () => {
       status: "frei",
       space: "85.4",
       floor: "Attikagechoss",
+      floor_num: 3,
       price: "1’631’000",
     },
   ];

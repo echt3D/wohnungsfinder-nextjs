@@ -54,11 +54,18 @@
                 "label": "Geschoss",
                 "placeholder": "",
                 "options": [
-                  "1-Erdgeschoss",
-                  "2-Obergeschoss",
-                  "3-Attikagechoss",
-                  "0-Gartengeschoss"
+                  "Erdgeschoss",
+                  "Obergeschoss",
+                  "Attikagechoss",
+                  "Gartengeschoss"
                 ]
+              }
+            },
+            "floor_num": {
+              "type": "Number",
+              "config": {
+                "label": "Geschoss_num",
+                "placeholder": ""
               }
             },
             "price": {

@@ -50,7 +50,7 @@ const Filter = ({ setOpenFilter }) => {
                 onChange={handleSort}
                 type="radio"
                 name="method"
-                value="floor"
+                value="floor_num"
               />
               <label>Geschoss</label>
             </div>

@@ -67,8 +67,18 @@ export interface WohnungDocumentDataWohnungItem {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   floor: prismic.SelectField<
-    "1-Erdgeschoss" | "2-Obergeschoss" | "3-Attikagechoss" | "0-Gartengeschoss"
+    "Erdgeschoss" | "Obergeschoss" | "Attikagechoss" | "Gartengeschoss"
   >;
+
+  /**
+   * Geschoss_num field in *wohnung → Wohnung*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: wohnung.wohnung[].floor_num
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  floor_num: prismic.NumberField;
 
   /**
    * Preis field in *wohnung → Wohnung*

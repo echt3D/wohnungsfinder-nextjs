@@ -30,34 +30,8 @@ const AptProvider = ({ children }) => {
     if (storedLikedApts) setLikedApts(JSON.parse(storedLikedApts));
   }, []);
 
-  const convertFloorsToNumber = (floor) => {
-    switch (floor) {
-      case "Erdgeschoss":
-        return 1;
-      case "Obergeschoss":
-        return 2;
-      case "Attikagechoss":
-        return 3;
-      case "Gartengeschoss":
-        return 0;
-    }
-  };
-
-  const changeFloorValue = (apartments) => {
-    const newArr = [];
-    for (const apartment of apartments) {
-      const newApartment = {
-        ...apartment,
-        floor: convertFloorsToNumber(apartment.floor),
-      };
-      newArr.push(newApartment);
-    }
-
-    return newArr;
-  };
-
   const sortApts = (apartments, method, direction) => {
-    const apartmentsCopy = changeFloorValue([...apartments]);
+    const apartmentsCopy = [...apartments];
 
     switch (direction) {
       case "descendent":
