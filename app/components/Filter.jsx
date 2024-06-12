@@ -1,18 +1,15 @@
 "use client";
 import { useContext } from "react";
 import { AptContext } from "../utils/createContext";
-import { useState } from "react";
+import { Slider } from "@nextui-org/react";
 
 const Filter = ({ setOpenFilter }) => {
   const { handleSort, sort, setSort } = useContext(AptContext);
-  //   const [isDescendent, setIsDescendent] = useState(true);
 
-  const handleDirection = () => {
-    // setIsDescendent(!isDescendent);
+  const handleDirection = () =>
     isDescendent()
       ? setSort({ ...sort, direction: "ascendent" })
       : setSort({ ...sort, direction: "descendent" });
-  };
 
   const isDescendent = () => sort.direction === "descendent";
 
@@ -64,6 +61,17 @@ const Filter = ({ setOpenFilter }) => {
               <label>Zimmer</label>
             </div>
           </div>
+        </section>
+        <section>
+          <Slider
+            label="Price Range"
+            step={50}
+            minValue={0}
+            maxValue={1000}
+            defaultValue={[100, 500]}
+            formatOptions={{ style: "currency", currency: "CHF" }}
+            className="max-w-md"
+          />
         </section>
       </div>
     </section>
