@@ -54,10 +54,10 @@
                 "label": "Geschoss",
                 "placeholder": "",
                 "options": [
-                  "Erdgeschoss",
-                  "Obergeschoss",
-                  "Attikagechoss",
-                  "Gartengeschoss"
+                  "1-Erdgeschoss",
+                  "2-Obergeschoss",
+                  "3-Attikagechoss",
+                  "0-Gartengeschoss"
                 ]
               }
             },

@@ -67,7 +67,7 @@ export interface WohnungDocumentDataWohnungItem {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   floor: prismic.SelectField<
-    "Erdgeschoss" | "Obergeschoss" | "Attikagechoss" | "Gartengeschoss"
+    "1-Erdgeschoss" | "2-Obergeschoss" | "3-Attikagechoss" | "0-Gartengeschoss"
   >;
 
   /**
