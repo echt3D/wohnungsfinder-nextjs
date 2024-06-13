@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState, useContext } from "react";
 import { AptContext } from "../utils/createContext";
 
-const Sidebar = ({ apartments, maxPrice, minPrice }) => {
+const Sidebar = ({ apartments, maxPrice, minPrice, maxSpace, minSpace }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const { sortApts, sort } = useContext(AptContext);
   return (
@@ -38,6 +38,8 @@ const Sidebar = ({ apartments, maxPrice, minPrice }) => {
           setOpenFilter={setOpenFilter}
           maxPrice={maxPrice}
           minPrice={minPrice}
+          maxSpace={maxSpace}
+          minSpace={minSpace}
         />
       ) : (
         <FilterButton setOpenFilter={setOpenFilter} />

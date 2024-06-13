@@ -89,17 +89,18 @@ const Home = async () => {
     return number;
   };
 
-  const getMinMaxPrice = (apartments) => {
+  const getMinMax = (apartments, category) => {
     apartments.sort(
-      (apartment1, apartment2) => apartment1.price - apartment2.price
+      (apartment1, apartment2) =>
+        strToNum(apartment1[category]) - strToNum(apartment2[category])
     );
 
-    const minPrice = strToNum(apartments[apartments.length - 1].price);
-    const maxPrice = strToNum(apartments[0].price);
+    const min = strToNum(apartments[0][category]);
+    const max = strToNum(apartments[apartments.length - 1][category]);
 
     return {
-      minPrice,
-      maxPrice,
+      min,
+      max,
     };
   };
 
@@ -112,8 +113,10 @@ const Home = async () => {
         </section>
         <Sidebar
           apartments={apartments}
-          maxPrice={getMinMaxPrice(apartments).maxPrice}
-          minPrice={getMinMaxPrice(apartments).minPrice}
+          maxPrice={getMinMax(apartments, "price").max}
+          minPrice={getMinMax(apartments, "price").min}
+          maxSpace={getMinMax(apartments, "space").max}
+          minSpace={getMinMax(apartments, "space").min}
         />
       </main>
     </AptProvider>
