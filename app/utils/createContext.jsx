@@ -16,4 +16,5 @@ export const AptContext = createContext({
   handleSort: () => {},
   sort: {},
   setSort: () => {},
+  getMinMaxPrice: () => {},
 });

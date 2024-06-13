@@ -83,6 +83,26 @@ const Home = async () => {
     },
   ];
 
+  const strToNum = (str) => {
+    const cleanedStr = str.replace(/’/g, "");
+    const number = parseInt(cleanedStr, 10);
+    return number;
+  };
+
+  const getMinMaxPrice = (apartments) => {
+    apartments.sort(
+      (apartment1, apartment2) => apartment1.price - apartment2.price
+    );
+
+    const minPrice = strToNum(apartments[apartments.length - 1].price);
+    const maxPrice = strToNum(apartments[0].price);
+
+    return {
+      minPrice,
+      maxPrice,
+    };
+  };
+
   return (
     <AptProvider>
       <main className="flex">
@@ -90,7 +110,11 @@ const Home = async () => {
           <Wohnungsfinder apartments={apartments} />
           <Navigations />
         </section>
-        <Sidebar apartments={apartments} />
+        <Sidebar
+          apartments={apartments}
+          maxPrice={getMinMaxPrice(apartments).maxPrice}
+          minPrice={getMinMaxPrice(apartments).minPrice}
+        />
       </main>
     </AptProvider>
   );

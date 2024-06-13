@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AptContext } from "../utils/createContext";
 import { Slider } from "@nextui-org/react";
 
-const Filter = ({ setOpenFilter }) => {
+const Filter = ({ setOpenFilter, maxPrice, minPrice }) => {
   const { handleSort, sort, setSort } = useContext(AptContext);
 
   const handleDirection = () =>
@@ -65,10 +65,10 @@ const Filter = ({ setOpenFilter }) => {
         <section>
           <Slider
             label="Price Range"
-            step={50}
-            minValue={0}
-            maxValue={1000}
-            defaultValue={[100, 500]}
+            step={100}
+            minValue={minPrice}
+            maxValue={maxPrice}
+            defaultValue={[minPrice, maxPrice]}
             formatOptions={{ style: "currency", currency: "CHF" }}
             className="max-w-md"
           />

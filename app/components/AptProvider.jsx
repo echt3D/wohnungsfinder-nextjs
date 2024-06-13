@@ -39,17 +39,14 @@ const AptProvider = ({ children }) => {
           (apartmentA, apartmentB) =>
             Number(apartmentA[method]) - Number(apartmentB[method])
         );
-        console.log("descendent here");
         break;
       case "ascendent":
         apartmentsCopy.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentB[method]) - Number(apartmentA[method])
         );
-        console.log("ascendent here");
         break;
     }
-    console.log("apartmentsCopy", apartmentsCopy);
     return apartmentsCopy;
   };
 
