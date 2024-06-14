@@ -20,6 +20,8 @@ const Filter = ({
     space,
     setSpace,
     checkbox,
+    setCheckbox,
+    resetFilter,
     handleCheckbox,
   } = useContext(AptContext);
 
@@ -152,6 +154,25 @@ const Filter = ({
               </li>
             ))}
           </ul>
+        </section>
+        <section>
+          <input
+            type="checkbox"
+            name="status"
+            value="frei"
+            onChange={handleCheckbox}
+            checked={isChecked("status", "frei")}
+            className="relative appearance-none cursor-pointer w-4 h-4 border border-black  rounded-full bg-white  checked:bg-black checked:border-0"
+          />
+          <label htmlFor="frei">Nur verfügbare Wohnungen</label>
+        </section>
+        <section>
+          <input
+            type="button"
+            value="Filter entfernen"
+            className="cursor-pointer"
+            onClick={() => resetFilter()}
+          />
         </section>
       </div>
     </section>

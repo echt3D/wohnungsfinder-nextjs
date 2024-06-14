@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 import { strToNum } from "../utils/format";
 
+const initSort = { method: "", direction: "descendent" };
+
 const initCheckbox = {
   floor: [],
   rooms: [],
+  status: [],
 };
 
 const AptProvider = ({ children }) => {
@@ -13,7 +16,7 @@ const AptProvider = ({ children }) => {
   const [clickedApt, setClickedApt] = useState(null);
   const [bgImage, setBgImage] = useState(1005);
   const [likedApts, setLikedApts] = useState([]);
-  const [sort, setSort] = useState({ method: "", direction: "descendent" });
+  const [sort, setSort] = useState(initSort);
   const [price, setPrice] = useState([null, null]);
   const [space, setSpace] = useState([null, null]);
   const [checkbox, setCheckbox] = useState(initCheckbox);
@@ -56,6 +59,13 @@ const AptProvider = ({ children }) => {
     }
   };
 
+  const filterByLikes = (apartments) => {
+    const filteredApt = apartments.filter((apartment) => {
+      if (likedApts.includes(apartment.apt_id)) return apartment;
+    });
+    return filteredApt;
+  };
+
   const sortApts = (apartments, category, direction) => {
     const apartmentsCopy = [...apartments];
 
@@ -75,22 +85,24 @@ const AptProvider = ({ children }) => {
 
     const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
+    const filteredByStatus = filterByCheckbox(filteredByRooms, "status");
+    // const filteredByLikes = filterByLikes(filteredByStatus);
 
     switch (direction) {
       case "descendent":
-        filteredByRooms.sort(
+        filteredByStatus.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentA[category]) - Number(apartmentB[category])
         );
         break;
       case "ascendent":
-        filteredByRooms.sort(
+        filteredByStatus.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentB[category]) - Number(apartmentA[category])
         );
         break;
     }
-    return filteredByRooms;
+    return filteredByStatus;
   };
 
   const handleSort = (e) => {
@@ -110,6 +122,12 @@ const AptProvider = ({ children }) => {
       );
       setCheckbox({ ...checkbox, [name]: filteredCheckbox });
     }
+  };
+
+  const resetFilter = () => {
+    setCheckbox(initCheckbox);
+    setSort(initSort);
+    console.log("checkbox", checkbox, "sort", sort);
   };
 
   const value = {
@@ -132,7 +150,9 @@ const AptProvider = ({ children }) => {
     space,
     setSpace,
     checkbox,
+    setCheckbox,
     handleCheckbox,
+    resetFilter,
   };
 
   return <AptContext.Provider value={value}>{children}</AptContext.Provider>;
