@@ -3,9 +3,25 @@ import { useContext, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 import { Slider } from "@nextui-org/react";
 
-const Filter = ({ setOpenFilter, maxPrice, minPrice, maxSpace, minSpace }) => {
-  const { handleSort, sort, setSort, price, setPrice, space, setSpace } =
-    useContext(AptContext);
+const Filter = ({
+  apartments,
+  setOpenFilter,
+  maxPrice,
+  minPrice,
+  maxSpace,
+  minSpace,
+}) => {
+  const {
+    handleSort,
+    sort,
+    setSort,
+    price,
+    setPrice,
+    space,
+    setSpace,
+    checkbox,
+    handleCheckbox,
+  } = useContext(AptContext);
 
   const handleDirection = () =>
     isDescendent()
@@ -14,10 +30,21 @@ const Filter = ({ setOpenFilter, maxPrice, minPrice, maxSpace, minSpace }) => {
 
   const isDescendent = () => sort.direction === "descendent";
 
-  useEffect(() => {
-    setPrice([minPrice, maxPrice]);
-    setSpace([minSpace, maxSpace]);
-  }, []);
+  const createCheckboxes = (apartments, keyName) => {
+    const checkboxArr = [];
+
+    for (const apartment of apartments) {
+      if (apartment.hasOwnProperty(keyName)) {
+        const value = apartment[keyName];
+        if (!checkboxArr.includes(value)) {
+          checkboxArr.push(value);
+        }
+      }
+    }
+    return checkboxArr;
+  };
+
+  const isChecked = (name, value) => checkbox[name].includes(value);
 
   return (
     <section className="w-full absolute z-100 bottom-0 h-full bg-black bg-opacity-40 flex items-end">
@@ -90,6 +117,41 @@ const Filter = ({ setOpenFilter, maxPrice, minPrice, maxSpace, minSpace }) => {
             value={space}
             className="max-w-md"
           />
+        </section>
+
+        <section>
+          <ul className="grid grid-cols-2 items-center gap-2 2xl:gap-6">
+            {createCheckboxes(apartments, "floor").map((input, i) => (
+              <li key={i} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="floor"
+                  value={input}
+                  onChange={handleCheckbox}
+                  checked={isChecked("floor", input)}
+                  className="relative appearance-none cursor-pointer w-4 h-4 border border-black  rounded-full bg-white  checked:bg-black checked:border-0"
+                />
+                <label htmlFor={input}>{input}</label>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <ul className="grid grid-cols-2 items-center gap-2 2xl:gap-6">
+            {createCheckboxes(apartments, "rooms").map((input, i) => (
+              <li key={i} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="rooms"
+                  value={input}
+                  onChange={handleCheckbox}
+                  checked={isChecked("rooms", input)}
+                  className="relative appearance-none cursor-pointer w-4 h-4 border border-black  rounded-full bg-white  checked:bg-black checked:border-0"
+                />
+                <label htmlFor={input}>{input}</label>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </section>

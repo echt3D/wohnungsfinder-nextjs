@@ -21,4 +21,6 @@ export const AptContext = createContext({
   setPrice: () => {},
   space: [],
   setSpace: () => {},
+  checkbox: {},
+  handleCheckbox: () => {},
 });

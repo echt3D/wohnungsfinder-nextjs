@@ -10,6 +10,11 @@ const Sidebar = ({ apartments, maxPrice, minPrice, maxSpace, minSpace }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const { sortApts, sort, setPrice, setSpace } = useContext(AptContext);
 
+  useEffect(() => {
+    setPrice([minPrice, maxPrice]);
+    setSpace([minSpace, maxSpace]);
+  }, []);
+
   return (
     <aside className="hidden xl:flex w-20vw  flex-col items-center  p-4  gap-4 relative">
       <div>
@@ -36,6 +41,7 @@ const Sidebar = ({ apartments, maxPrice, minPrice, maxSpace, minSpace }) => {
       </div>
       {openFilter ? (
         <Filter
+          apartments={apartments}
           setOpenFilter={setOpenFilter}
           maxPrice={maxPrice}
           minPrice={minPrice}

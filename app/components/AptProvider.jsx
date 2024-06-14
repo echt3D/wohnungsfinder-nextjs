@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 import { strToNum } from "../utils/format";
 
+const initCheckbox = {
+  floor: [],
+  rooms: [],
+};
+
 const AptProvider = ({ children }) => {
   const [hoveredApt, setHoveredApt] = useState(null);
   const [clickedApt, setClickedApt] = useState(null);
@@ -11,6 +16,7 @@ const AptProvider = ({ children }) => {
   const [sort, setSort] = useState({ method: "", direction: "descendent" });
   const [price, setPrice] = useState([null, null]);
   const [space, setSpace] = useState([null, null]);
+  const [checkbox, setCheckbox] = useState(initCheckbox);
 
   const handleLikedApts = (apartment) => {
     if (likedApts.includes(apartment)) {
@@ -43,8 +49,6 @@ const AptProvider = ({ children }) => {
   const sortApts = (apartments, category, direction) => {
     const apartmentsCopy = [...apartments];
 
-    console.log("price", price, "space", space);
-
     const filteredByPrice = filterByRange(
       apartmentsCopy,
       "price",
@@ -52,16 +56,12 @@ const AptProvider = ({ children }) => {
       price[1]
     );
 
-    console.log("filteredByPrice", filteredByPrice);
-
     const filteredBySpace = filterByRange(
       filteredByPrice,
       "space",
       space[0],
       space[1]
     );
-
-    console.log("filteredBySpace", filteredBySpace);
 
     switch (direction) {
       case "descendent":
@@ -85,6 +85,20 @@ const AptProvider = ({ children }) => {
     setSort({ ...sort, [name]: value });
   };
 
+  const handleCheckbox = (e) => {
+    const { name, value } = e.target;
+
+    if (!checkbox[name].includes(value)) {
+      checkbox[name].push(value);
+      setCheckbox({ ...checkbox, [name]: checkbox[name] });
+    } else {
+      const filteredCheckbox = checkbox[name].filter(
+        (checked) => checked !== value
+      );
+      setCheckbox({ ...checkbox, [name]: filteredCheckbox });
+    }
+  };
+
   const value = {
     hoveredApt,
     setHoveredApt,
@@ -104,6 +118,8 @@ const AptProvider = ({ children }) => {
     setPrice,
     space,
     setSpace,
+    checkbox,
+    handleCheckbox,
   };
 
   return <AptContext.Provider value={value}>{children}</AptContext.Provider>;

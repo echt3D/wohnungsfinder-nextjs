@@ -1,16 +1,20 @@
 "use client";
-import Image from "next/image";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 const MouseCard = ({ hoveredApt }) => {
   const cursorRef = useRef(null);
+  gsap.config({
+    nullTargetWarn: false,
+  });
 
   const moveCursor = (e) => {
-    gsap.to(cursorRef.current, {
-      x: e.clientX + 20,
-      y: e.clientY + 20,
-      startAt: { x: e.clientX + 20, y: e.clientY + 20 },
-    });
+    if (cursorRef.current) {
+      gsap.to(cursorRef.current, {
+        x: e.clientX + 20,
+        y: e.clientY + 20,
+        startAt: { x: e.clientX + 20, y: e.clientY + 20 },
+      });
+    }
   };
 
   useEffect(() => {
