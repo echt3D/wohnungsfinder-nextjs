@@ -46,6 +46,16 @@ const AptProvider = ({ children }) => {
         strToNum(apartment[category]) <= max
     );
 
+  const filterByCheckbox = (apartments, category) => {
+    if (checkbox[category].length) {
+      return apartments.filter((apartment) => {
+        if (checkbox[category].includes(apartment[category])) return apartment;
+      });
+    } else {
+      return apartments;
+    }
+  };
+
   const sortApts = (apartments, category, direction) => {
     const apartmentsCopy = [...apartments];
 
@@ -63,21 +73,24 @@ const AptProvider = ({ children }) => {
       space[1]
     );
 
+    const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
+    const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
+
     switch (direction) {
       case "descendent":
-        filteredBySpace.sort(
+        filteredByRooms.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentA[category]) - Number(apartmentB[category])
         );
         break;
       case "ascendent":
-        filteredBySpace.sort(
+        filteredByRooms.sort(
           (apartmentA, apartmentB) =>
             Number(apartmentB[category]) - Number(apartmentA[category])
         );
         break;
     }
-    return filteredBySpace;
+    return filteredByRooms;
   };
 
   const handleSort = (e) => {
