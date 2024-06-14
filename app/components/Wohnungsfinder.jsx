@@ -5,7 +5,7 @@ import MouseCard from "./MouseCard";
 import svgData from "../utils/svgData.json";
 
 const Wohnungsfinder = ({ apartments }) => {
-  const { hoveredApt, setHoveredApt, bgImage, setBgImage } =
+  const { hoveredApt, setHoveredApt, bgImage } =
     useContext(AptContext);
 
   const handleHover = (apartment) =>

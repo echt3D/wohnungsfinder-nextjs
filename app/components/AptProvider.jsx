@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
+import { strToNum } from "../utils/format";
 
 const AptProvider = ({ children }) => {
   const [hoveredApt, setHoveredApt] = useState(null);
@@ -8,6 +9,8 @@ const AptProvider = ({ children }) => {
   const [bgImage, setBgImage] = useState(1005);
   const [likedApts, setLikedApts] = useState([]);
   const [sort, setSort] = useState({ method: "", direction: "descendent" });
+  const [price, setPrice] = useState([null, null]);
+  const [space, setSpace] = useState([null, null]);
 
   const handleLikedApts = (apartment) => {
     if (likedApts.includes(apartment)) {
@@ -30,24 +33,51 @@ const AptProvider = ({ children }) => {
     if (storedLikedApts) setLikedApts(JSON.parse(storedLikedApts));
   }, []);
 
-  const sortApts = (apartments, method, direction) => {
+  const filterByRange = (apartments, category, min, max) =>
+    apartments.filter(
+      (apartment) =>
+        strToNum(apartment[category]) >= min &&
+        strToNum(apartment[category]) <= max
+    );
+
+  const sortApts = (apartments, category, direction) => {
     const apartmentsCopy = [...apartments];
+
+    console.log("price", price, "space", space);
+
+    const filteredByPrice = filterByRange(
+      apartmentsCopy,
+      "price",
+      price[0],
+      price[1]
+    );
+
+    console.log("filteredByPrice", filteredByPrice);
+
+    const filteredBySpace = filterByRange(
+      filteredByPrice,
+      "space",
+      space[0],
+      space[1]
+    );
+
+    console.log("filteredBySpace", filteredBySpace);
 
     switch (direction) {
       case "descendent":
-        apartmentsCopy.sort(
+        filteredBySpace.sort(
           (apartmentA, apartmentB) =>
-            Number(apartmentA[method]) - Number(apartmentB[method])
+            Number(apartmentA[category]) - Number(apartmentB[category])
         );
         break;
       case "ascendent":
-        apartmentsCopy.sort(
+        filteredBySpace.sort(
           (apartmentA, apartmentB) =>
-            Number(apartmentB[method]) - Number(apartmentA[method])
+            Number(apartmentB[category]) - Number(apartmentA[category])
         );
         break;
     }
-    return apartmentsCopy;
+    return filteredBySpace;
   };
 
   const handleSort = (e) => {
@@ -70,6 +100,10 @@ const AptProvider = ({ children }) => {
     handleSort,
     sort,
     setSort,
+    price,
+    setPrice,
+    space,
+    setSpace,
   };
 
   return <AptContext.Provider value={value}>{children}</AptContext.Provider>;

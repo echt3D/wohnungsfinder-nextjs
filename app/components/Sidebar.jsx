@@ -3,12 +3,13 @@ import SidebarCard from "./SidebarCard";
 import FilterButton from "./FilterButton";
 import Filter from "./Filter";
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AptContext } from "../utils/createContext";
 
 const Sidebar = ({ apartments, maxPrice, minPrice, maxSpace, minSpace }) => {
   const [openFilter, setOpenFilter] = useState(false);
-  const { sortApts, sort } = useContext(AptContext);
+  const { sortApts, sort, setPrice, setSpace } = useContext(AptContext);
+
   return (
     <aside className="hidden xl:flex w-20vw  flex-col items-center  p-4  gap-4 relative">
       <div>

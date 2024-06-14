@@ -3,6 +3,7 @@ import Wohnungsfinder from "./components/Wohnungsfinder";
 import AptProvider from "./components/AptProvider";
 import Navigations from "./components/Navigations";
 import Sidebar from "./components/Sidebar";
+import { strToNum } from "./utils/format";
 
 const Home = async () => {
   // const client = prismic.createClient();
@@ -82,12 +83,6 @@ const Home = async () => {
       price: "1’631’000",
     },
   ];
-
-  const strToNum = (str) => {
-    const cleanedStr = str.replace(/’/g, "");
-    const number = parseInt(cleanedStr, 10);
-    return number;
-  };
 
   const getMinMax = (apartments, category) => {
     apartments.sort(
