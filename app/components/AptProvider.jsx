@@ -59,12 +59,12 @@ const AptProvider = ({ children }) => {
     }
   };
 
-  const filterByLikes = (apartments) => {
-    const filteredApt = apartments.filter((apartment) => {
-      if (likedApts.includes(apartment.apt_id)) return apartment;
-    });
-    return filteredApt;
-  };
+  // const filterByLikes = (apartments) => {
+  //   const filteredApt = apartments.filter((apartment) => {
+  //     if (likedApts.includes(apartment.apt_id)) return apartment;
+  //   });
+  //   return filteredApt;
+  // };
 
   const sortApts = (apartments, category, direction) => {
     const apartmentsCopy = [...apartments];
@@ -124,12 +124,6 @@ const AptProvider = ({ children }) => {
     }
   };
 
-  const resetFilter = () => {
-    setCheckbox(initCheckbox);
-    setSort(initSort);
-    console.log("checkbox", checkbox, "sort", sort);
-  };
-
   const value = {
     hoveredApt,
     setHoveredApt,
@@ -152,7 +146,6 @@ const AptProvider = ({ children }) => {
     checkbox,
     setCheckbox,
     handleCheckbox,
-    resetFilter,
   };
 
   return <AptContext.Provider value={value}>{children}</AptContext.Provider>;

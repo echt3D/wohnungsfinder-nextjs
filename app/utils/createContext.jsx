@@ -24,5 +24,4 @@ export const AptContext = createContext({
   checkbox: {},
   setCheckbox: () => {},
   handleCheckbox: () => {},
-  resetFilter: () => {},
 });

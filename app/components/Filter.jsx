@@ -21,7 +21,7 @@ const Filter = ({
     setSpace,
     checkbox,
     setCheckbox,
-    resetFilter,
+    // resetFilter,
     handleCheckbox,
   } = useContext(AptContext);
 
@@ -47,6 +47,17 @@ const Filter = ({
   };
 
   const isChecked = (name, value) => checkbox[name].includes(value);
+
+  const resetFilter = () => {
+    setCheckbox({
+      floor: [],
+      rooms: [],
+      status: [],
+    });
+    setSort({ method: "", direction: "descendent" });
+    setPrice([minPrice, maxPrice]);
+    setSpace([minSpace, maxSpace]);
+  };
 
   return (
     <section className="w-full absolute z-100 bottom-0 h-full bg-black bg-opacity-40 flex items-end">
