@@ -25,7 +25,7 @@ const SidebarCard = ({ apartment }) => {
     <div
       onMouseEnter={() => setHoveredApt(apartment)}
       onMouseLeave={() => setHoveredApt("")}
-      className="flex flex-col gap-6"
+      className="w-full flex flex-col gap-6"
     >
       <section>
         <div className="flex items-center justify-between">

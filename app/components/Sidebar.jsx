@@ -16,7 +16,7 @@ const Sidebar = ({ apartments, maxPrice, minPrice, maxSpace, minSpace }) => {
   }, []);
 
   return (
-    <aside className="hidden xl:flex w-20vw  flex-col items-center  p-4  gap-4 relative">
+    <aside className="hidden xl:flex w-[375px] flex-col items-center  p-4  gap-4 absolute z-1000 border-blue-500 border-2 bg-white">
       <div>
         <Image
           src="/logos/echt3d-logo.png"

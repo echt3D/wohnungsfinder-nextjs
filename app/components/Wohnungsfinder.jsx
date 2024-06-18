@@ -6,92 +6,52 @@ import svgData from "../utils/svgData.json";
 
 const Wohnungsfinder = ({ apartments }) => {
   const { hoveredApt, setHoveredApt, bgImage } = useContext(AptContext);
-  const [path, setPath] = useState([null, null]);
   const canvasRef = useRef(null);
   const canvasContainerRef = useRef(null);
+  let canvas;
+
+  const initializeOrUpdateCanvas = () => {
+    canvas = canvasRef.current;
+    console.log("canvas", canvas);
+    canvas.width = canvasContainerRef.current.offsetWidth;
+    canvas.height = canvasContainerRef.current.offsetHeight;
+    canvas.style.width = `${canvasContainerRef.current.offsetWidth}px`;
+    canvas.style.height = `${canvasContainerRef.current.offsetHeight}px`;
+
+    // drawCanvasSVGCombined(actualView);
+  };
 
   useEffect(() => {
-    console.log("canvasContainerRef", canvasContainerRef.current.offsetWidth);
-    const canvas = canvasRef.current;
-    const bounds = { width: 2400, height: 1350 };
-    const scale = Math.max(
-      canvas.width.baseVal.value / bounds.width,
-      canvas.height.baseVal.value / bounds.height
-    );
-
-    const scaledWidth = bounds.width * scale;
-    const scaledHeight = bounds.height * scale;
-    const centerX = canvas.width.baseVal.value / 2;
-    const centerY = canvas.height.baseVal.value / 2;
-    const pathX = centerX - scaledWidth / 2;
-    const pathY = centerY - scaledHeight / 2;
-
-    console.log("paths", pathX, pathY);
-    setPath[(pathX, pathY)];
-
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.save();
-    // ctx.translate(pathX, pathY);
-    // ctx.scale(scale, scale);
-
-    // const svgArr = Object.entries(svgData[bgImage]);
-
-    // svgArr.forEach((paths) => {
-    //   const p = new Path2D(paths[1]);
-    //   ctx.stroke(p);
-    //   ctx.lineWidth = 12;
-    //   ctx.strokeStyle = "orange";
-    // });
+    drawCanvasSVGCombined(bgImage);
   }, []);
 
-  // const handleResize = useCallback(() => {
-  //   const canvas = canvasRef.current;
-  //   canvas.width = canvasContainerRef.current.offsetWidth;
-  //   canvas.height = canvasContainerRef.current.offsetHeight;
-  //   canvas.style.width = `${canvasContainerRef.current.offsetWidth}px`;
-  //   canvas.style.height = `${canvasContainerRef.current.offsetHeight}px`;
+  const drawCanvasSVGCombined = (bgImage) => {
+    canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const bounds = { width: 2400, height: 1350 };
+    const scale = Math.max(
+      canvas.width / bounds.width,
+      canvas.height / bounds.height
+    );
+    const scaledWidth = bounds.width * scale;
+    const scaledHeight = bounds.height * scale;
+    const pathX = (canvas.width - scaledWidth) / 2;
+    const pathY = (canvas.height - scaledHeight) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(pathX, pathY);
+    ctx.scale(scale, scale);
 
-  //   // drawCanvasBG();
-  //   // drawCanvasSVGCombined(actualView);
-  // });
-
-  // useEffect(() => {
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (canvasContainerRef.current) {
-  //     const observer = new ResizeObserver(() => handleResize());
-
-  //     observer.observe(canvasContainerRef.current);
-
-  //     const errorHandler = (e) => {
-  //       if (
-  //         e.message.includes(
-  //           "ResizeObserver loop completed with undelivered notifications" ||
-  //             "ResizeObserver loop limit exceeded"
-  //         )
-  //       ) {
-  //         const resizeObserverErr = document.getElementById(
-  //           "webpack-dev-server-client-overlay"
-  //         );
-  //         if (resizeObserverErr) {
-  //           resizeObserverErr.style.display = "none";
-  //         }
-  //       }
-  //     };
-  //     window.addEventListener("error", errorHandler);
-  //     return () => {
-  //       window.removeEventListener("error", errorHandler);
-  //       observer.disconnect();
-  //     };
-  //   }
-  // }, [canvasContainerRef]);
+    const svgPathsArr = Object.values(svgData[bgImage]);
+    console.log("svgPathsArr", svgPathsArr);
+    svgPathsArr.forEach((svgPath) => {
+      ctx.save();
+      const p = new Path2D(svgPath);
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "orange";
+      ctx.stroke(p);
+    });
+  };
 
   const handleHover = (apartment) =>
     setHoveredApt({ ...apartment, hoveredInMain: true });
@@ -100,24 +60,24 @@ const Wohnungsfinder = ({ apartments }) => {
     <div
       style={{
         backgroundImage: `url('/images/${bgImage}.jpg')`,
+        backgroundSize: "cover",
       }}
       ref={canvasContainerRef}
-      className="w-full h-full bg-center "
+      className="w-screen h-screen bg-center"
     >
-      {hoveredApt && hoveredApt.hoveredInMain && (
+      {/* {hoveredApt && hoveredApt.hoveredInMain && (
         <MouseCard hoveredApt={hoveredApt} />
-      )}
+      )} */}
 
-      {/* <canvas
+      <canvas
         ref={canvasRef}
-        className="w-screen h-full border-red-500  border-2"
-      /> */}
-      <svg
+        height={`${window.innerHeight}`}
+        width={`${window.innerWidth}`}
+        // className="w-full h-full border-red-500  border-2"
+      />
+      {/* <svg
         ref={canvasRef}
-        style={{
-          transform: "translate(-175px, -60px)",
-        }}
-        className={`w-full h-full border-2 border-red-500`}
+        className={`w-full h-full border-2 border-green-500`}
       >
         {svgData[bgImage].map((svg, i) => (
           <path
@@ -129,7 +89,7 @@ const Wohnungsfinder = ({ apartments }) => {
             onMouseLeave={() => setHoveredApt(null)}
           />
         ))}
-      </svg>
+      </svg> */}
     </div>
   );
 };
